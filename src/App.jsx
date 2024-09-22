@@ -1,21 +1,58 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 import { Amplify } from 'aws-amplify';
+import { fetchUserAttributes } from '@aws-amplify/auth'
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css'
 import config from './amplifyconfiguration.json';
 Amplify.configure(config);
 
+async function handleFetchUserAttributes() {
+  try {
+    const userAttributes = await fetchUserAttributes();
+    // console.log(userAttributes.nickname);
+    return(userAttributes.nickname);
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
 function App({signOut, user}) {
-  console.log(user);
-  // console.log(Auth.currentAuthenticatedUser());
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const userAttributes = await handleFetchUserAttributes();
+        setRole(userAttributes);
+        // console.log("Role:: " + role);
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+      }
+    };
+    fetchUserRole();
+  }, []);
+
+  // console.log("Role: " + role);
   return (
     <>
-      <h1>Hello {user.username}</h1>
-      <button onClick={signOut}>Sign Out</button>
+    {role == "admin" ? (
+      <>
+        <h1>Hello Admin</h1>
+        <button onClick={signOut}>Sign Out</button>
+      </>
+    ):(
+      <>
+        <h1>Hello User</h1>
+        <button onClick={signOut}>Sign Out</button>
+      </>
+    )}
     </>
   )
 }
