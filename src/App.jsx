@@ -39,6 +39,10 @@ function App({signOut, user}) {
     fetchUserRole();
   }, []);
 
+  if (role === null) {
+    return <div>Loading...</div>; // Show a loading state until the role is fetched
+  }
+
   // console.log("Role: " + role);
   return (
     <>
