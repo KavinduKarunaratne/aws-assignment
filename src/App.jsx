@@ -53,7 +53,9 @@ function App({signOut, user}) {
       </>
     ):(
       <>
-        <h1>Hello User</h1>
+        <h1 className="text-3xl font-bold underline">
+          Hello User
+        </h1>
         <button onClick={signOut}>Sign Out</button>
       </>
     )}
