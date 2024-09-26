@@ -40,7 +40,7 @@ function App({signOut, user}) {
   }, []);
 
   if (role === null) {
-    return <div>Loading...</div>; // Show a loading state until the role is fetched
+    return <div>Loading...</div>;
   }
 
   // console.log("Role: " + role);
