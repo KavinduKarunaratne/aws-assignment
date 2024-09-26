@@ -11,6 +11,7 @@ import config from './amplifyconfiguration.json';
 Amplify.configure(config);
 
 import Sidebar from './components/Sidebar';
+import Player from './components/Player';
 
 async function handleFetchUserAttributes() {
   try {
@@ -60,6 +61,7 @@ function App({signOut, user}) {
           <div className='h-[90%] flex'>
             <Sidebar/>
           </div>
+          <Player/>
         </div>
       </>
     )}
