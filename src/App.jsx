@@ -10,6 +10,8 @@ import '@aws-amplify/ui-react/styles.css'
 import config from './amplifyconfiguration.json';
 Amplify.configure(config);
 
+import Sidebar from './components/Sidebar';
+
 async function handleFetchUserAttributes() {
   try {
     const userAttributes = await fetchUserAttributes();
@@ -52,11 +54,13 @@ function App({signOut, user}) {
         <button onClick={signOut}>Sign Out</button>
       </>
     ):(
+      
       <>
-        <h1 className="text-3xl font-bold underline">
-          Hello User
-        </h1>
-        <button onClick={signOut}>Sign Out</button>
+        <div className='h-screen bg-black'>
+          <div className='h-[90%] flex'>
+            <Sidebar/>
+          </div>
+        </div>
       </>
     )}
     </>
