@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,7 +13,7 @@ Amplify.configure(config);
 import Sidebar from './components/Sidebar';
 import Player from './components/Player';
 import Display from './components/Display';
-
+import { PlayerContext } from './context/PlayerContext'
 
 async function handleFetchUserAttributes() {
   try {
@@ -30,6 +30,8 @@ async function handleFetchUserAttributes() {
 
 function App({signOut, user}) {
   const [role, setRole] = useState(null);
+
+  const { audioRef, track } = useContext(PlayerContext);
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -65,6 +67,7 @@ function App({signOut, user}) {
             <Display/>
           </div>
           <Player/>
+          <audio ref={audioRef} src={track.file} preload='auto'></audio>
         </div>
       </>
     )}
