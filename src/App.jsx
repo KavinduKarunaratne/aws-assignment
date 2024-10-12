@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar';
 import Player from './components/Player';
 import Display from './components/Display';
 import { PlayerContext } from './context/PlayerContext'
+import AdminLayout from './components/AdminLayout';
 
 async function handleFetchUserAttributes() {
   try {
@@ -55,8 +56,9 @@ function App({signOut, user}) {
     <>
     {role == "admin" ? (
       <>
-        <h1>Hello Admin</h1>
-        <button onClick={signOut}>Sign Out</button>
+        {/* <h1>Hello Admin</h1>
+        <button onClick={signOut}>Sign Out</button> */}
+        <AdminLayout />
       </>
     ):(
       
